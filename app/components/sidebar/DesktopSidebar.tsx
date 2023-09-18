@@ -8,7 +8,6 @@ interface DesktopSidebarProps {
   currentUser: User;
 }
 export default function DesktopSidebar({ currentUser }: DesktopSidebarProps) {
-  console.log(currentUser);
   const routes = useRoutes();
   const [isOpen, setIsOpen] = useState(false);
   return (
