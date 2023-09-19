@@ -9,6 +9,7 @@ import format from "date-fns/format";
 import { Fragment, useMemo, useState } from "react";
 import { IoClose, IoTrash } from "react-icons/io5";
 import AvatarGroup from "@/app/components/AvatarGroup";
+import useActiveList from "@/app/hooks/useActiveList";
 type Props = {
   data: Conversation & {
     users: User[];
@@ -19,6 +20,8 @@ type Props = {
 
 export default function ProfileDrawer({ onClose, isOpen, data }: Props) {
   const otherUser = useOtherUser(data);
+  const { members } = useActiveList();
+  const isActive = members.indexOf(otherUser.email!) !== -1;
   const joinedDate = useMemo(() => {
     return format(new Date(otherUser.createdAt), "PP");
   }, [otherUser.createdAt]);
@@ -29,8 +32,8 @@ export default function ProfileDrawer({ onClose, isOpen, data }: Props) {
     if (data.isGroup) {
       return `${data.users.length} members`;
     }
-    return "Active";
-  }, [data]);
+    return isActive ? "Online" : "Offline";
+  }, [data, isActive]);
 
   const [confirmOpen, setConfirmOpen] = useState(false);
   return (
@@ -113,7 +116,9 @@ export default function ProfileDrawer({ onClose, isOpen, data }: Props) {
                                     Emails
                                   </dt>
                                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-                                    {data.users.map((user) => <p className="font-bold">{user.email}</p>)}
+                                    {data.users.map((user) => (
+                                      <p className="font-bold">{user.email}</p>
+                                    ))}
                                   </dd>
                                 </div>
                               )}
