@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import useOtherUser from "@/app/hooks/useOtherUser";
 import { useRouter } from "next/navigation";
 import Avatar from "@/app/components/Avatar";
+import AvatarGroup from "@/app/components/AvatarGroup";
 type Props = {
   data: FullConversationType;
   selected?: boolean;
@@ -56,7 +57,11 @@ export default function ConversationBox({ data, selected }: Props) {
       )}
       onClick={handleClick}
     >
-      <Avatar User={otherUser} />
+      {data.isGroup ? (
+        <AvatarGroup users={data.users} />
+      ) : (
+        <Avatar User={otherUser} />
+      )}
       <div className="min-w-0 flex-1">
         <div className="focus:outline-none">
           <div className="flex justify-between items-center mb-1">
