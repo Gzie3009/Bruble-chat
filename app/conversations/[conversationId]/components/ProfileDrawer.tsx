@@ -117,7 +117,9 @@ export default function ProfileDrawer({ onClose, isOpen, data }: Props) {
                                   </dt>
                                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
                                     {data.users.map((user) => (
-                                      <p className="font-bold">{user.email}</p>
+                                      <p key={user.id} className="font-bold">
+                                        {user.email}
+                                      </p>
                                     ))}
                                   </dd>
                                 </div>
