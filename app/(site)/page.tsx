@@ -1,8 +1,9 @@
+import Link from "next/link";
 import AuthForm from "./components/AuthForm";
 
 export default function Home() {
   return (
-    <div className="flex min-h-full flex-col jusitfy-center py-12 sm:px-6 lg:px-8 bg-gray-100">
+    <div className="flex min-h-full flex-col jusitfy-center py-8 sm:px-6 lg:px-8 bg-gray-100 -mt-2">
       <div className="sm:mx-auto sm:w-full sm:max-w-md flex flex-col justify-center items-center min-h-full">
         <svg
           width="200"
@@ -130,6 +131,15 @@ export default function Home() {
         </h2>
       </div>
       <AuthForm />
+      <div className="text-center mt-4">
+        Developed By{" "}
+        <Link
+          href="https://mrinmoy3009.vercel.app/"
+          className="font-bold underline underline-offset-2"
+        >
+          Mrinmoy Saikia
+        </Link>
+      </div>
     </div>
   );
 }
